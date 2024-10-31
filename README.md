@@ -14,19 +14,19 @@ O sistema deve incluir uma estrutura robusta de autenticação, funcionalidades 
 ## Requisitos Funcionais
 
 ### Persistência de Dados
-1. A aplicação deve manter um registro de todas as chaves de criptografia utilizadas, armazenando-as em um banco de dados para garantir um histórico completo.
+A aplicação deve manter um registro de todas as chaves de criptografia utilizadas, armazenando-as em um banco de dados para garantir um histórico completo.
 
 ### Usuário MESTRE
-2. No primeiro uso da aplicação, deve ser criado automaticamente um **usuário MESTRE** com privilégios exclusivos.
+No primeiro uso da aplicação, deve ser criado automaticamente um **usuário MESTRE** com privilégios exclusivos.
    - O usuário MESTRE é essencial para a administração do sistema e **não pode ser editado ou deletado**.
 
 ### Autenticação e Autorização
-3. Implementar autenticação baseada em **JWT (JSON Web Token)**:
+Implementar autenticação baseada em **JWT (JSON Web Token)**:
    - O token JWT deve expirar em **1 dia** para manter a segurança do sistema.
    - Apenas usuários autenticados com um JWT válido devem poder acessar as funcionalidades principais.
 
 ### Endpoints da API
-4. A API deve disponibilizar os seguintes endpoints:
+A API deve disponibilizar os seguintes endpoints:
 
    - **GET /current-key**: Retorna a chave de criptografia atual em uso.
    
@@ -45,7 +45,7 @@ O sistema deve incluir uma estrutura robusta de autenticação, funcionalidades 
       - A nova chave resultante deve ser registrada no banco de dados e substituir a chave anterior como a chave atual.
 
 ### Paginação
-5. O histórico de chaves deve ser paginável para otimizar o desempenho e a experiência do usuário em casos de grandes volumes de dados.
+O histórico de chaves deve ser paginável para otimizar o desempenho e a experiência do usuário em casos de grandes volumes de dados.
 
 ## Regras de Negócio
 
