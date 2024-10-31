@@ -17,7 +17,7 @@ O sistema deve incluir uma estrutura robusta de autenticação, funcionalidades 
 1. A aplicação deve manter um registro de todas as chaves de criptografia utilizadas, armazenando-as em um banco de dados para garantir um histórico completo.
 
 ### Usuário MESTRE
-2. No primeiro uso da aplicação, d  eve ser criado automaticamente um **usuário MESTRE** com privilégios exclusivos.
+2. No primeiro uso da aplicação, deve ser criado automaticamente um **usuário MESTRE** com privilégios exclusivos.
    - O usuário MESTRE é essencial para a administração do sistema e **não pode ser editado ou deletado**.
 
 ### Autenticação e Autorização
