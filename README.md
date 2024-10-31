@@ -93,7 +93,7 @@ Este desafio tem o objetivo de avaliar as habilidades em:
 
 ## Instruções para Entrega
 
-1. Forneça o código-fonte completo da aplicação em um repositório.
+1. Dê um fork neste repositório e inclua nele todos os arquivos necessários para sua aplicação.
 2. Inclua um arquivo README com instruções sobre como executar a aplicação e exemplos de uso dos endpoints.
 3. Certifique-se de que todas as dependências estejam listadas e documentadas.
 4. **Testes Unitários**: Se optar por implementá-los, forneça instruções detalhadas para a execução e configuração do ambiente de testes.
