@@ -4,6 +4,7 @@
 ## Descrição
 
 Você foi convocado para recriar um sistema de ataque à mítica máquina ENIGMA. Durante a Segunda Guerra Mundial, a ENIGMA foi um marco de invencibilidade, mas, após décadas de inatividade, ela voltou à cena, adotando uma configuração curiosa: a icônica cifra de César. Por razões que escapam ao nosso entendimento (aparentemente uma preferência pessoal da ENIGMA por clássicos), a chave de criptografia agora tem o comprimento da primeira palavra em cada mensagem interceptada. Essa decisão levanta suspeitas, mas cabe a você superá-la.
+
 Sua tarefa é desenvolver uma aplicação robusta para gerenciar essas chaves, além de gerenciar usuários e decifrar documentos criptografados. A linguagem de implementação foi escolhida por ordens superiores, e todos os protocolos indicam que apenas Golang pode suportar o processamento necessário.
 
 ## Objetivos Gerais
