@@ -1,0 +1,174 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "ENIGMA",
+    "description": "Operacao Enigma",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/"
+    }
+  ],
+  "paths": {
+    "/users/": {
+      "get": {
+        "tags": [
+          "User - CRUD"
+        ],
+        "summary": "Leitura dos Usuários",
+        "description": "Lista todos os usuários cadastrados no sistema.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "User - CRUD"
+        ],
+        "summary": "Cadatro de Usuário",
+        "description": "Permite o cadastro de novos usuários no sistema.",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "senha": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "nome",
+                  "email",
+                  "senha"
+                ]
+              },
+              "example": {
+                "nome": "",
+                "email": "",
+                "senha": ""
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "put": {
+        "tags": [
+          "User - CRUD"
+        ],
+        "summary": "Atualização de Usuário",
+        "description": "Permite a edição do nome de um usuário específico, excluindo o usuário MESTRE.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "nome"
+                ]
+              },
+              "example": {
+                "nome": ""
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "User - CRUD"
+        ],
+        "summary": "Deleçao de Usuário",
+        "description": "Permite deletar um usuário, exceto o usuário MESTRE.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/auth/": {
+      "post": {
+        "tags": [
+          "Autenticacao"
+        ],
+        "summary": "Autenticação de Usuário",
+        "description": "Permite que com o email e senha, o usuário autentique-se no sistema.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}
