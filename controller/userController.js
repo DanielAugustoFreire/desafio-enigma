@@ -51,7 +51,7 @@ export default class UserController{
                 let userRepository = new UserRepository();
                 let usuarioBanco = await userRepository.obterUsuarioPorId(id);
                 if(usuarioBanco[0].is_master){
-                    res.status(400).json("Usuário master não pode ser alterado");
+                    res.status(400).json("Usuário Mestre não pode ser alterado");
                 }
                 let user = new UserEntitie(id, nome, "", "", "", false);
                 let result = await userRepository.atualizarNomeUsuario(user);
