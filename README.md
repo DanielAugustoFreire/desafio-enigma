@@ -58,16 +58,4 @@ Desenvolvi os seguintes endpoints utilizando Express:
 
 Implementei boas práticas de segurança, incluindo o armazenamento seguro das senhas usando hashing com salt. A aplicação também previne ataques de força bruta e injeções.
 
-## Testes Unitários
-
-Embora não sejam obrigatórios, implementei testes unitários utilizando **Jest** para as funcionalidades principais, focando em:
-
-- **Validação de Autenticação**: Testes para garantir a criação e expiração de tokens JWT.
-- **Endpoints**: Testes para garantir que os endpoints funcionem corretamente e respeitem as regras de acesso.
-- **Processamento de Arquivos**: Testes para garantir a correta descriptografia usando a chave correta.
-
-Os testes podem ser executados com o comando:
-
-```bash
-npm test
 
