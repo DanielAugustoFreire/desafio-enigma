@@ -222,8 +222,17 @@
         "summary": "Descriptografar",
         "description": "Este endpoint recebe um arquivo criptografado e uma string com a primeira palavra descriptografada do arquivo: -Se a string estiver vazia, o sistema deve tentar descriptografar o arquivo usando a chave atual. -A nova chave resultante deve ser registrada no banco de dados e substituir a chave anterior como a chave atual.",
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         },
         "requestBody": {
@@ -261,8 +270,37 @@
         "summary": "Obter chave atual",
         "description": "Retorna a chave atual do sistema.",
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/keys": {
+      "get": {
+        "tags": [
+          "Key"
+        ],
+        "summary": "Listar chaves",
+        "description": "Retorna uma lista de chaves registradas no sistema.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }

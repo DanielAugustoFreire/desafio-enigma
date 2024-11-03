@@ -50,7 +50,7 @@ export default class KeyEntitie{
                 if(distancia < 0){
                     distancia = 26 + distancia;
                 }
-                return
+                return distancia;
             }
         }
 
@@ -84,8 +84,6 @@ export default class KeyEntitie{
         
         return textoCompletoDescriptografado.join("");
     }
-    
-    
 
     ehMaiuscula(letra){
         if(letra >=65 && letra <= 90){
@@ -95,6 +93,10 @@ export default class KeyEntitie{
         }else{
             return false
         }
+    }
+
+    gerarData(){
+        return new Date().toISOString().slice(0, 19).replace('T', ' ');
     }
 
 }

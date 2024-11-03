@@ -7,7 +7,7 @@ const auth = new AuthMiddleware();
 const ctrl = new KeyController();
 
 
-router.post("/decrypt", (req, res) => {
+router.post("/decrypt", auth.autenticarUsuarioMestre, (req, res) => {
     // #swagger.tags = ['Key']
     // #swagger.summary = 'Descriptografar'
     // #swagger.description = 'Este endpoint recebe um arquivo criptografado e uma string com a primeira palavra descriptografada do arquivo: -Se a string estiver vazia, o sistema deve tentar descriptografar o arquivo usando a chave atual. -A nova chave resultante deve ser registrada no banco de dados e substituir a chave anterior como a chave atual.'
@@ -38,6 +38,13 @@ router.get("/current-key", (req, res) => {
     // #swagger.summary = 'Obter chave atual'
     // #swagger.description = 'Retorna a chave atual do sistema.'
     ctrl.obterChaveAtual(req, res);
+});
+
+router.get("/keys", (req, res) => {
+    // #swagger.tags = ['Key']
+    // #swagger.summary = 'Listar chaves'
+    // #swagger.description = 'Retorna uma lista de chaves registradas no sistema.'
+    ctrl.listarKeysPaginadas(req, res);
 });
 
 

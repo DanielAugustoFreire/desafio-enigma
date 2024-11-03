@@ -11,11 +11,38 @@ export default class keyRepository extends BaseRepository{
     async obterChaveAtual(){
         let sql = "select * from TB_Keys where ativo = 1";
 
-        let result = await this.db.query(sql);
+        let result = await this.db.ExecutaComando(sql);
 
         return this.toMap(result);
     }
 
+    async adicionarChave(chave){
+        let sql = "INSERT INTO TB_Keys (chave, data_criacao, ativo, id_usuario) VALUES (?, ?, ?, ?)";
+    
+        let values = [chave.chave, chave.data_criacao, chave.ativo, chave.id_usuario];
+
+        let result = await this.db.ExecutaComando(sql, values);
+
+        return result.affectedRows > 0;
+    }
+
+    async desatualizarChaveAnterior(id, data){
+        let sql = "UPDATE TB_Keys SET ativo = 0, data_expiracao = ? WHERE id = ?";
+
+        let values = [data, id];
+
+        let result = await this.db.ExecutaComando(sql, values);
+
+        return result.affectedRows > 0;
+    }
+
+    async listarChaves(){
+        let sql = "SELECT * FROM TB_Keys ORDER BY data_criacao dESC";
+
+        let result = await this.db.ExecutaComando(sql);
+
+        return this.toMap(result);
+    }
 
 
     toMap(rows) {
@@ -26,12 +53,12 @@ export default class keyRepository extends BaseRepository{
             for(let i = 0; i < rows.length; i++) {
                 let row = rows[i];
                 let key = new KeyEntitie();
-                key.id = row["usu_id"];
-                key.chave = row["usu_nome"];
-                key.data_criacao = row["usu_email"];
-                key.data_expiracao = row["usu_senha"];
-                key.ativo = row["is_master"];
-                key.id_usuario = row["is_master"];
+                key.id = row["id"];
+                key.chave = row["chave"];
+                key.data_criacao = row["data_criacao"];
+                key.data_expiracao = row["data_expiracao"];
+                key.ativo = row["ativo"];
+                key.id_usuario = row["id_usuario"];
     
                 lista.push(key);
             }
