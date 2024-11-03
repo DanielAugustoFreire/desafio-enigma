@@ -4,6 +4,7 @@ import swaggerUi from 'swagger-ui-express';
 
 import userRoute from './routes/userRoute.js';
 import authRoute from './routes/authRoute.js';
+import keyRoute from './routes/keyRoute.js';
 
 import UserRepository from './repository/userRepository.js';
 
@@ -35,17 +36,22 @@ app.use(express.json());
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(outputJson));
 app.use("/users", userRoute);
 app.use("/auth", authRoute);
+app.use("/", keyRoute);
+
+
+
+
 
 async function InicializarDefaultUser(){
     try{        
         let userRepository = new UserRepository();
-        let userDefault = new UserEntitie("", "master", "master@vlabhealth.com", "12345", "", true);
+        let userDefault = new UserEntitie("", "Mestre", "mestre@enigma.com", "12345", "", true);
         userDefault = userDefault.setarSalt()
         userDefault = await userDefault.setarHash()
         await userRepository.cadastrarUsuario(userDefault);
     }catch(ex){
         if(ex.code == "ER_DUP_ENTRY"){
-            console.log("Usuario master ja cadastrado")
+            console.log("Usuario Mestre ja cadastrado")
         }else{
             console.log(ex.message)
         }
