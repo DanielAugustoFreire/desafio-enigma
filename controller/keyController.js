@@ -9,14 +9,20 @@ export default class KeyController{
     }
 
     async descriptografar(req,res){
-        let { mensagem, chave } = req.body;
-        let keyRepo = new keyRepository();
-        let keyEnt= new KeyEntitie();
-        if(mensagem){
-            if(!chave)
-                chave = keyRepo.obterChaveAtual();
-            let deslocamento = keyEnt.pegarDistancia(mensagem, chave);
-            let mensagemDescriptografada = keyEnt.descriptografar(mensagem, deslocamento);
+        try{
+            let { mensagem, chave } = req.body;
+            let keyRepo = new keyRepository();
+            let keyEnt= new KeyEntitie();
+            if(mensagem){
+                if(!chave)
+                    chave = keyRepo.obterChaveAtual();
+                let deslocamento = keyEnt.pegarDescolamento(mensagem, chave);
+                let mensagemDescriptografada = keyEnt.descriptografar(mensagem, deslocamento);
+                res.status(200).send(mensagemDescriptografada);
+            }
+        }
+        catch(ex){
+            res.status(500).send(ex.message);
         }
     }
 

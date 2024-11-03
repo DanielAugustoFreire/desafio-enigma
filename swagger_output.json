@@ -22,6 +22,9 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -39,6 +42,9 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"
@@ -101,6 +107,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -149,6 +158,9 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"
@@ -208,10 +220,35 @@
           "Key"
         ],
         "summary": "Descriptografar",
-        "description": "Este endpoint recebe um arquivo criptografado e uma string com a primeira palavra descriptografada do arquivo: \\n Se a string estiver vazia, o sistema deve tentar descriptografar o arquivo usando a chave atual. A nova chave resultante deve ser registrada no banco de dados e substituir a chave anterior como a chave atual.",
+        "description": "Este endpoint recebe um arquivo criptografado e uma string com a primeira palavra descriptografada do arquivo: -Se a string estiver vazia, o sistema deve tentar descriptografar o arquivo usando a chave atual. -A nova chave resultante deve ser registrada no banco de dados e substituir a chave anterior como a chave atual.",
         "responses": {
-          "200": {
-            "description": "OK"
+          "default": {
+            "description": ""
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "mensagem": {
+                    "type": "string"
+                  },
+                  "chave": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "mensagem"
+                ]
+              },
+              "example": {
+                "mensagem": "",
+                "chave": ""
+              }
+            }
           }
         }
       }
@@ -224,8 +261,8 @@
         "summary": "Obter chave atual",
         "description": "Retorna a chave atual do sistema.",
         "responses": {
-          "200": {
-            "description": "OK"
+          "default": {
+            "description": ""
           }
         }
       }

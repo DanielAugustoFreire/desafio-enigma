@@ -36,25 +36,65 @@ export default class KeyEntitie{
         this.#id_usuario = id_usuario;
     }
 
-    pegarDistancia(mensagem, chave){
-        let primeiraLetraChave = "A"
-        let primeiraLetraMensagem = "a"
+    pegarDescolamento(mensagem, chave){
+        for(let i = 0; i < mensagem.length; i++){
+            let primeiraLetraChave = mensagem[i];
+            let primeiraLetraMensagem = chave[i];
+    
+            let posicaoPrimeiraLetraChave = primeiraLetraChave.charCodeAt(0);
+            let posicaoPrimeiraLetraMensagem = primeiraLetraMensagem.charCodeAt(0);
+            
+            let distancia = posicaoPrimeiraLetraChave - posicaoPrimeiraLetraMensagem;
+    
+            if(distancia != 0){ // caso seja um caracter que a cifra nao 'cobre' ele passa para a proxima letra da chave
+                if(distancia < 0){
+                    distancia = 26 + distancia;
+                }
+                return
+            }
+        }
 
-        let posicaoPrimeiraLetraChave = primeiraLetraChave.charCodeAt(0);
-        let posicaoPrimeiraLetraMensagem = primeiraLetraMensagem.charCodeAt(0);
-
-        console.log(posicaoPrimeiraLetraChave);
-        console.log(posicaoPrimeiraLetraMensagem);
-        
-        distancia = posicaoPrimeiraLetraMensagem - posicaoPrimeiraLetraChave;
+        return distancia;
     }
 
-    descriptografar(mensagem, deslocamento){
-        let textoCompletoDescriptografado = "";
+    descriptografar(mensagem, deslocamento) {
+        let textoCompletoDescriptografado = [];
+    
+        for (let i = 0; i < mensagem.length; i++) {
+            let letra = mensagem[i];
+            let posicaoLetra = letra.charCodeAt(0);
+            let ehMaiuscula = this.ehMaiuscula(posicaoLetra);
+    
+            if (ehMaiuscula === "M") {
+                let novaPosicao = posicaoLetra - deslocamento;
+                if (novaPosicao < 65) {
+                    novaPosicao += 26;
+                }
+                textoCompletoDescriptografado.push(String.fromCharCode(novaPosicao));
+            } else if (ehMaiuscula === "m") {
+                let novaPosicao = posicaoLetra - deslocamento;
+                if (novaPosicao < 97) {
+                    novaPosicao += 26;
+                }
+                textoCompletoDescriptografado.push(String.fromCharCode(novaPosicao));
+            } else {
+                textoCompletoDescriptografado.push(letra);
+            }
+        }
+        
+        return textoCompletoDescriptografado.join("");
+    }
+    
+    
 
-        for(let i = 0; i < mensagem.length; i++){
-
-        }  
+    ehMaiuscula(letra){
+        if(letra >=65 && letra <= 90){
+            return "M"
+        }else if(letra >=97 && letra <= 122){
+            return "m"
+        }else{
+            return false
+        }
     }
 
 }
