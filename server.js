@@ -3,10 +3,15 @@ import cookieParser from 'cookie-parser';
 import swaggerUi from 'swagger-ui-express';
 
 import userRoute from './routes/userRoute.js';
+import authRoute from './routes/authRoute.js';
+import keyRoute from './routes/keyRoute.js';
+
+import UserRepository from './repository/userRepository.js';
 
 const app = express();
 
 import { createRequire } from "module";
+import UserEntitie from './entities/userEntitie.js';
 const require = createRequire(import.meta.url);
 const outputJson = require("./swagger_output.json");
 
@@ -30,9 +35,32 @@ app.use(express.json());
 
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(outputJson));
 app.use("/users", userRoute);
+app.use("/auth", authRoute);
+app.use("/", keyRoute);
 
 
-app.listen(5000, () => {
+
+
+
+async function InicializarDefaultUser(){
+    try{        
+        let userRepository = new UserRepository();
+        let userDefault = new UserEntitie("", "Mestre", "mestre@enigma.com", "12345", "", true);
+        userDefault = userDefault.setarSalt()
+        userDefault = await userDefault.setarHash()
+        await userRepository.cadastrarUsuario(userDefault);
+    }catch(ex){
+        if(ex.code == "ER_DUP_ENTRY"){
+            console.log("Usuario Mestre ja cadastrado")
+        }else{
+            console.log(ex.message)
+        }
+    }
+}
+
+InicializarDefaultUser()
+
+app.listen(5000, async () => {
     console.log("Servidor rodando na porta 5000")
-})
+});
 
