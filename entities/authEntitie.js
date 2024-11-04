@@ -2,40 +2,43 @@
 
 export default class AuthEntitie{
 
-    salvar_global(ip){
-
-
+    iniciar_sessao_caso_nao_exista(ip){
         if (!global.sessao) {
             global.sessao = {};
         }
         /*Seta as listas no obj -> sessaoDF */
         if (!global.sessao[ip]) {
-            global.sessao[ip] = { NumeroTentativas: 0, validade: new Date() };
+            global.sessao[ip] = { NumeroTentativas: 0, validade: new Date(), banido: false };
         }
+    }
+
+    salvar_global(ip){
+        this.iniciar_sessao_caso_nao_exista(ip);
         
         global.sessao[ip].NumeroTentativas = global.sessao[ip].NumeroTentativas + 1;
-        console.log(global.sessao[ip].NumeroTentativas);
+        global.sessao
     }
 
     checarTentativas(ip){
-        if (!global.sessao) {
-            global.sessao = {};
-        }
-        /*Seta as listas no obj -> sessaoDF */
-        if (!global.sessao[ip]) {
-            global.sessao[ip] = { NumeroTentativas: 0, validade: null };
-        }
+        this.iniciar_sessao_caso_nao_exista(ip);
 
-        if(global.sessao[ip].validade == null && global.sessao[ip].NumeroTentativas >= 3){
-            global.sessao[ip].NumeroTentativas = 0;
+        if(global.sessao[ip].banido){
+            if(global.sessao[ip].validade < new Date()){
+                global.sessao[ip].banido = false;
+                global.sessao[ip].NumeroTentativas += 1;
+            }else{
+                return global.sessao[ip];
+            }
         }
 
         return global.sessao[ip]
     }
 
-    banir_ip_minutos(ip){
+    banir_ip_minutos(ip, tentativas){
 
-        global.sessao[ip].validade = new Date(new Date().getTime() + 10 * 1000);
+        global.sessao[ip].validade = new Date(new Date().getTime() + tentativas * 60 * 1000);
+        global.sessao[ip].banido = true;
+
         console.log(global.sessao[ip].validade);
     }
 

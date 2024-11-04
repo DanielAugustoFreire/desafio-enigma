@@ -10,9 +10,9 @@ export default class AuthController{
         let authEntitie = new AuthEntitie()
         const clientIp = req.ip;    
         let Tentativas = authEntitie.checarTentativas(clientIp);
-        if(Tentativas.NumeroTentativas >= 3){
-            authEntitie.banir_ip_minutos(clientIp);
-            res.status(400).json({mensagem: "Muitas tentativas, tente novamente mais tarde!"});
+        if(Tentativas.NumeroTentativas % 3 == 0 && Tentativas.NumeroTentativas != 0){
+            authEntitie.banir_ip_minutos(clientIp, Tentativas.NumeroTentativas);
+            res.status(400).json({mensagem: "Muitas tentativas, tente novamente mais tarde!" + Tentativas.NumeroTentativas});
             return;
         }
         try{
