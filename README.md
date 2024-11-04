@@ -43,9 +43,9 @@ No repositório, há um script de criação das tabelas, bem como uma imagem do 
 
 ## 2. Usuário MESTRE
 
-Ao iniciar a aplicação pela primeira vez, um usuário MESTRE é criado automaticamente, garantindo que o sistema tenha um administrador sempre disponível. Esse usuário tem privilégios totais e não pode ser modificado ou excluído.       
+Ao iniciar a aplicação pela primeira vez, um usuário MESTRE é criado automaticamente, garantindo que o sistema tenha um administrador sempre disponível. Esse usuário tem privilégios totais e não pode ser modificado ou excluído. Apenas o usuario Mestre pode ver a lista de chaves paginadas e realizar o CRUD dos usuarios.
 ```bash 
-Nome: Mestre, Email: mestre@enigma.com, Senha: 12345
+Nome: Mestre, Email: mestre@enigma.com, Senha: Xsejmfççtrcty548!40
 ```
 
 ## 3. Autenticação e Autorização
