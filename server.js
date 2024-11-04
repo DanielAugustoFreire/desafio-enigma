@@ -5,6 +5,7 @@ import swaggerUi from 'swagger-ui-express';
 import userRoute from './routes/userRoute.js';
 import authRoute from './routes/authRoute.js';
 import keyRoute from './routes/keyRoute.js';
+import keyRoute from './routes/keyRoute.js';
 
 import UserRepository from './repository/userRepository.js';
 
@@ -41,6 +42,11 @@ app.use("/", keyRoute);
 
 
 
+app.use("/", keyRoute);
+
+
+
+
 
 async function InicializarDefaultUser(){
     try{        
@@ -51,6 +57,7 @@ async function InicializarDefaultUser(){
         await userRepository.cadastrarUsuario(userDefault);
     }catch(ex){
         if(ex.code == "ER_DUP_ENTRY"){
+            console.log("Usuario Mestre ja cadastrado")
             console.log("Usuario Mestre ja cadastrado")
         }else{
             console.log(ex.message)
