@@ -1,0 +1,22 @@
+{
+  "name": "desafio-enigma",
+  "version": "1.0.0",
+  "description": "desafio_enigma",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node swagger.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "DanielAugusto",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.11.3",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.1"
+  }
+}
