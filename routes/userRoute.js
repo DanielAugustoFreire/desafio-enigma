@@ -6,14 +6,14 @@ const router = express.Router();
 const auth = new AuthMiddleware();
 const ctrl = new UserController();
 
-router.get('/', auth.autenticarUsuario, (req, res) => {
+router.get('/', auth.autenticarUsuarioMestre, (req, res) => {
     // #swagger.tags = ['User - CRUD']
     // #swagger.summary = 'Leitura dos Usuários'
     // #swagger.description = 'Lista todos os usuários cadastrados no sistema.'
     ctrl.listarUsuarios(req, res);
 });
 
-router.post('/', auth.autenticarUsuario, (req, res) => {
+router.post('/', auth.autenticarUsuarioMestre, (req, res) => {
     // #swagger.tags = ['User - CRUD']
     // #swagger.summary = 'Cadatro de Usuário'
     // #swagger.description = 'Permite o cadastro de novos usuários no sistema.' 
@@ -41,7 +41,7 @@ router.post('/', auth.autenticarUsuario, (req, res) => {
     ctrl.criarUsuario(req, res);
 });
 
-router.put('/:id', auth.autenticarUsuario, (req, res) => {
+router.put('/:id', auth.autenticarUsuarioMestre, (req, res) => {
     // #swagger.tags = ['User - CRUD']
     // #swagger.summary = 'Atualização de Usuário'
     // #swagger.description = 'Permite a edição do nome de um usuário específico, excluindo o usuário MESTRE.' 
@@ -66,7 +66,7 @@ router.put('/:id', auth.autenticarUsuario, (req, res) => {
     ctrl.atualizarNomeUsuario(req, res);
 });
 
-router.delete('/:id', auth.autenticarUsuario, (req, res) => {  
+router.delete('/:id', auth.autenticarUsuarioMestre, (req, res) => {  
     // #swagger.tags = ['User - CRUD']
     // #swagger.summary = 'Deleçao de Usuário'
     // #swagger.description = 'Permite deletar um usuário, exceto o usuário MESTRE.' 
