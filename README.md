@@ -9,13 +9,13 @@ Neste projeto, desenvolvi uma aplicação em JavaScript para recriar um sistema 
 A aplicação é organizada utilizando o padrão MVC (Model-View-Controller) com Entidades e Repositories.
 
 # Como usar?
-***De Acordo com as instrucoes "Certifique-se de que todas as dependências estejam listadas e documentadas." a branch `master` contem todos os as dependencias ja instalados, portanto sem o .gitignore para node, caso deseje baixar uma branch com o gitignore (para nao fazer o download da node_modules pelo navegador) baixe a branch `Daniel`.***
+***De acordo com as instruções: "Certifique-se de que todas as dependências estejam listadas e documentadas." A branch `master` contém todas as dependências já instaladas, portanto, sem o .gitignore para Node. Caso deseje baixar uma branch com o .gitignore (para não fazer o download da node_modules pelo navegador), baixe a branch `Daniel`.***
 
-Para instalar as dependencias digite (caso esteja usando a branch Daniel):
+Para instalar as dependências, digite (caso esteja usando a branch Daniel):
 ``` 
     npm install
 ```
-Preencha o arquivo `./database/database.js` com os seguintes dados do seu banco de dados mysql:
+Preencha o arquivo `./database/database.js` com os seguintes dados do seu banco de dados MySql:
 ```
     host:
     database:
@@ -29,7 +29,7 @@ Para rodar o projeto:
     npm start
 ```
 
-Acesso à area documentada com swagger: [localhost:5000/docs](localhost:5000/docs)
+Acesso à área documentada com swagger: [localhost:5000/docs](localhost:5000/docs)
 
 ## Funcionalidades Implementadas
 
@@ -37,7 +37,7 @@ Acesso à area documentada com swagger: [localhost:5000/docs](localhost:5000/doc
 
 Utilizei **MySQL** como banco de dados para armazenar as chaves de criptografia e os usuários. As conexões e operações com o banco foram gerenciadas na camada de `repositories`, garantindo que todas as operações de CRUD fossem executadas de forma eficiente.
 
-No repositorio tem o script de criacao das tabelas, tanto quanto uma imagem do diagrama delas. Para testar com o seu banco mysql conectado, basta preencher os dados do seu banco no arquivo `./database/database.js`
+No repositório, há um script de criação das tabelas, bem como uma imagem do diagrama delas. Para testar com o seu banco MySql conectado, basta preencher os dados do seu banco no arquivo `./database/database.js`
 
 ![image](https://github.com/user-attachments/assets/32f08064-eea1-4148-9c96-232bfa3a130f)
 
@@ -50,7 +50,7 @@ Nome: Mestre, Email: mestre@enigma.com, Senha: 12345
 
 ## 3. Autenticação e Autorização
 
-Implementei autenticação baseada em **JWT**. O token é gerado após o login, tem um tempo de expiração de 1 dia e é renovado a cada requisição autenticada. A verificação do token é realizada através de um middleware, que protege os endpoints sensíveis.
+Implementei autenticação baseada em **JWT**. O token é gerado após o login, tem um tempo de expiração de 1 dia e é renovado a cada requisição autenticada. A verificação do token é realizada por meio de um middleware, que protege os endpoints sensíveis.
 
 ## 4. Proteção Contra Força Bruta
 
@@ -84,6 +84,6 @@ Desenvolvi os seguintes endpoints utilizando Express:
 
 Implementei boas práticas de segurança, incluindo o armazenamento seguro das senhas usando hashing com salt. A aplicação também previne ataques de força bruta e injeções.
 
-Problema: Nao consegui de forma alguma arrumar o problema do client pegar o token de um master e colar no proprio token.
+Problema: Não consegui de forma alguma resolver o problema do cliente pegar o token de um mestre e colar no próprio token.
 
 
