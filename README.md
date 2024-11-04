@@ -1,103 +1,89 @@
+# Solução para o Desafio: Ataque contra a ENIGMA
 
-# Desafio: Ataque contra a ENIGMA
+## Introdução
 
-## Descrição
+Neste projeto, desenvolvi uma aplicação em JavaScript para recriar um sistema de ataque à máquina ENIGMA, focando na implementação de um sistema seguro de gerenciamento de chaves e usuários, além de permitir a descriptografia de documentos criptografados.
 
-Você foi convocado para recriar um sistema de ataque à mítica máquina ENIGMA. Durante a Segunda Guerra Mundial, a ENIGMA foi um marco de invencibilidade, mas, após décadas de inatividade, ela voltou à cena, adotando uma configuração curiosa: a icônica cifra de César. Por razões que escapam ao nosso entendimento (aparentemente uma preferência pessoal da ENIGMA por clássicos), a chave de criptografia agora tem o comprimento da primeira palavra em cada mensagem interceptada. Essa decisão levanta suspeitas, mas cabe a você superá-la.
+## Estrutura do Projeto
 
-Sua tarefa é desenvolver uma aplicação robusta para gerenciar essas chaves, além de gerenciar usuários e decifrar documentos criptografados. A linguagem de implementação foi escolhida por ordens superiores, e todos os protocolos indicam que apenas Golang pode suportar o processamento necessário.
+A aplicação é organizada utilizando o padrão MVC (Model-View-Controller) com Entidades e Repositories.
 
-## Objetivos Gerais
+# Como usar?
+***De acordo com as instruções: "Certifique-se de que todas as dependências estejam listadas e documentadas." A branch `master` contém todas as dependências já instaladas, portanto, sem o .gitignore para Node. Caso deseje baixar uma branch com o .gitignore (para não fazer o download da node_modules pelo navegador), baixe a branch `Daniel`.***
 
-O sistema deve incluir uma estrutura robusta de autenticação, funcionalidades para gerenciamento de chaves criptográficas, e endpoints para cadastro e manipulação de usuários. Além disso, a aplicação deve processar arquivos criptografados, permitindo descriptografá-los com uma chave específica ou com a última chave registrada no sistema.
+Para instalar as dependências, digite (caso esteja usando a branch Daniel):
+``` 
+    npm install
+```
+Preencha o arquivo `./database/database.js` com os seguintes dados do seu banco de dados MySql:
+```
+    host:
+    database:
+    user:
+    password: 
+```
+![image](https://github.com/user-attachments/assets/32f08064-eea1-4148-9c96-232bfa3a130f)
 
-## Requisitos Funcionais
-
-### Persistência de Dados
-A aplicação deve manter um registro de todas as chaves de criptografia utilizadas, armazenando-as em um banco de dados para garantir um histórico completo.
-
-### Usuário MESTRE
-No primeiro uso da aplicação, deve ser criado automaticamente um **usuário MESTRE** com privilégios exclusivos.
-   - O usuário MESTRE é essencial para a administração do sistema e **não pode ser editado ou deletado**.
-
-### Autenticação e Autorização
-Implementar autenticação baseada em **JWT (JSON Web Token)**:
-   - O token JWT deve expirar em **1 dia** para manter a segurança do sistema.
-   - Apenas usuários autenticados com um JWT válido devem poder acessar as funcionalidades principais.
-
-### Endpoints da API
-A API deve disponibilizar os seguintes endpoints:
-
-   - **GET /current-key**: Retorna a chave de criptografia atual em uso.
-   
-   - **GET /keys?page={n}**: Retorna uma lista paginada de todas as chaves de criptografia registradas no sistema, para facilitar o gerenciamento do histórico de chaves.
-
-   - **GET /users**: Lista todos os usuários cadastrados no sistema.
-
-   - **POST /users**: Permite o cadastro de novos usuários no sistema.
-
-   - **PUT /users/{id}**: Permite a edição do nome de um usuário específico, excluindo o usuário MESTRE.
-
-   - **DELETE /users/{id}**: Permite deletar um usuário, exceto o usuário MESTRE.
-
-   - **POST /decrypt**: Este endpoint recebe um arquivo criptografado e uma string com a primeira palavra descriptografada do arquivo:
-      - Se a string estiver vazia, o sistema deve tentar descriptografar o arquivo usando a chave atual.
-      - A nova chave resultante deve ser registrada no banco de dados e substituir a chave anterior como a chave atual.
-
-### Paginação
-O histórico de chaves deve ser paginável para otimizar o desempenho e a experiência do usuário em casos de grandes volumes de dados.
-
-## Regras de Negócio
-
-- **Usuário MESTRE**: Não pode ser modificado nem excluído. Deve ter privilégios de acesso completo ao sistema.
-  
-- **Segurança**:
-   - As senhas dos usuários devem ser armazenadas de maneira segura utilizando hashing com salt.
-   - A aplicação deve seguir boas práticas de segurança para prevenir vulnerabilidades como ataques de força bruta e tentativas de injeção.
-
-## Requisitos Não Funcionais
-
-- **Linguagem**: Golang.
-- **Banco de Dados**: Escolha à sua preferência (PostgreSQL, MySQL, SQLite, etc.).
-- **Autenticação**: JWT com expiração configurada para 1 dia.
-- **Documentação**: Deve ser fornecida documentação completa da API (preferencialmente com Swagger ou outra ferramenta similar).
-- **Código Limpo**: O código deve ser organizado e de fácil leitura, seguindo boas práticas de estruturação e estilo.
-- **Testes Unitários (Opcional)**: A aplicação não exige testes unitários obrigatórios. No entanto, a implementação de uma suíte de testes que cobre as funcionalidades principais é recomendada e será considerada um **diferencial na avaliação**, proporcionando pontos extras.
-- **Docker (Opcional)**: A utilização do Docker neste projeto é opcional. No entanto, seu uso acrescentará um **diferencial** à avaliação
-
-## Orientações para Testes Unitários (Opcional)
-
-Se optar por implementar testes, concentre-se nas seguintes áreas:
-   - **Validação de Autenticação**: Testes que verifiquem o fluxo de autenticação JWT, incluindo criação e expiração de tokens.
-   - **Endpoints Principais**: Testes para os endpoints de criação, leitura, atualização e exclusão de usuários, além de verificação de permissões para o usuário MESTRE.
-   - **Processamento de Arquivos**: Teste o fluxo de descriptografia, especialmente o uso da chave correta e a substituição da chave atual.
-
-Os testes podem ser executados com o comando:
-
-```bash
-go test ./...
+Para rodar o projeto:
+``` 
+    npm start
 ```
 
-A aplicação deve incluir uma instrução sobre a configuração do ambiente de teste, especialmente se houver dependências de banco de dados.
+Acesso à área documentada com swagger: [localhost:5000/docs](localhost:5000/docs)
 
-## Objetivos do Desafio
+## Funcionalidades Implementadas
 
-Este desafio tem o objetivo de avaliar as habilidades em:
+## 1. Persistência de Dados
 
-- Desenvolvimento de APIs RESTful seguras e escaláveis.
-- Implementação de autenticação e autorização com JWT.
-- Manipulação de arquivos e criptografia.
-- Persistência de dados e operações de CRUD no banco de dados.
-- Utilização de boas práticas de programação e segurança em Golang.
-- **Implementação opcional de testes unitários para demonstrar habilidades em cobertura e validação de código.**
+Utilizei **MySQL** como banco de dados para armazenar as chaves de criptografia e os usuários. As conexões e operações com o banco foram gerenciadas na camada de `repositories`, garantindo que todas as operações de CRUD fossem executadas de forma eficiente.
 
-## Instruções para Entrega
+No repositório, há um script de criação das tabelas, bem como uma imagem do diagrama delas. Para testar com o seu banco MySql conectado, basta preencher os dados do seu banco no arquivo `./database/database.js`
 
-1. Dê um fork neste repositório e inclua nele todos os arquivos necessários para sua aplicação.
-2. Inclua um arquivo README com instruções sobre como executar a aplicação e exemplos de uso dos endpoints.
-3. Certifique-se de que todas as dependências estejam listadas e documentadas.
-4. **Testes Unitários**: Se optar por implementá-los, forneça instruções detalhadas para a execução e configuração do ambiente de testes.
+![image](https://github.com/user-attachments/assets/32f08064-eea1-4148-9c96-232bfa3a130f)
 
----
+## 2. Usuário MESTRE
 
-**Boa sorte e bom desenvolvimento!**
+Ao iniciar a aplicação pela primeira vez, um usuário MESTRE é criado automaticamente, garantindo que o sistema tenha um administrador sempre disponível. Esse usuário tem privilégios totais e não pode ser modificado ou excluído. Apenas o usuario Mestre pode ver a lista de chaves paginadas e realizar o CRUD dos usuarios.
+```bash 
+Nome: Mestre, Email: mestre@enigma.com, Senha: Xsejmfççtrcty548!40
+```
+
+## 3. Autenticação e Autorização
+
+Implementei autenticação baseada em **JWT**. O token é gerado após o login, tem um tempo de expiração de 1 dia e é renovado a cada requisição autenticada. A verificação do token é realizada por meio de um middleware, que protege os endpoints sensíveis.
+
+## 4. Proteção Contra Força Bruta
+
+### Visão Geral
+Este módulo implementa um sistema de controle de tentativas de autenticação, prevenindo abusos através do bloqueio temporário de endereços IP após um número excessivo de tentativas de login falhas. O objetivo é proteger a aplicação contra ataques de força bruta e melhorar a segurança geral.
+
+### Funcionalidade
+O módulo monitora as tentativas de autenticação e aplica as seguintes regras:
+
+### Contagem de Tentativas:
+- A cada tentativa de login, o módulo registra o IP do cliente e incrementa o contador de tentativas em uma variavel global com um array de sessoes e cada sessao corresponde a um ip.
+
+### Bloqueio de IP:
+- Se um cliente atingir um número de tentativas múltiplo de 3 (ex.: 3, 6, 9, etc.), o IP será temporariamente banido.
+- O tempo de banimento base é de 1 minuto * numero de tentativas falhas.
+
+
+## 5. Endpoints da API
+
+Desenvolvi os seguintes endpoints utilizando Express:
+
+- **GET /api/current-key**: Retorna a chave de criptografia atual.
+- **GET /api/keys?page={n}**: Lista todas as chaves, suportando paginação.
+- **GET /api/users**: Lista todos os usuários cadastrados.
+- **POST /api/users**: Permite o cadastro de novos usuários.
+- **PUT /api/users/:id**: Permite editar o nome de um usuário.
+- **DELETE /api/users/:id**: Permite deletar um usuário, exceto o MESTRE.
+- **POST /api/decrypt**: Recebe um arquivo criptografado e a primeira palavra descriptografada, tentando descriptografar o arquivo.
+
+### 6. Segurança
+
+Implementei boas práticas de segurança, incluindo o armazenamento seguro das senhas usando hashing com salt. A aplicação também previne ataques de força bruta e injeções.
+
+Problema: Não consegui de forma alguma resolver o problema do cliente pegar o token de um mestre e colar no próprio token.
+
+
