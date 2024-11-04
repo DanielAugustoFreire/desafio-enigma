@@ -33,7 +33,7 @@ export default class AuthController{
                     });
                     authEntitie.zerarTentativas(clientIp)
                     req.usuarioLogado = usuarioRetornadoPeloEmail;
-                    res.status(200).json({mensagem: "Login efetuado com sucesso! JWT: " + token});
+                    res.status(200).json({token});
                 }else{
                     authEntitie.salvar_global(clientIp)
                     res.status(400).json({mensagem: "Senha Incorreta!"});

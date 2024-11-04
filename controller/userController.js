@@ -1,6 +1,4 @@
-import Database from '../database/database.js';
 import UserEntitie from '../entities/userEntitie.js';
-import AuthMiddleware from '../middlewares/authMiddleware.js';
 import UserRepository from '../repository/userRepository.js';
 
 export default class UserController{
@@ -50,6 +48,10 @@ export default class UserController{
             if(nome){
                 let userRepository = new UserRepository();
                 let usuarioBanco = await userRepository.obterUsuarioPorId(id);
+                if(usuarioBanco.length == 0){
+                    res.status(400).json("Usuário não encontrado");
+                    return;
+                }
                 if(usuarioBanco[0].is_master){
                     res.status(400).json("Usuário Mestre não pode ser alterado");
                 }

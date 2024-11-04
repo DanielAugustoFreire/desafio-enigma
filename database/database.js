@@ -9,10 +9,10 @@ export default class Database {
     constructor() {
 
         this.#conexao = mysql.createPool({
-            host: '132.226.245.178',
-            database: 'PFS2_10442313682',
-            user: '10442313682',
-            password: '10442313682',
+            host: '',
+            database: '',
+            user: '',
+            password: '',
         });
     }
 

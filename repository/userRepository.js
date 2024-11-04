@@ -8,7 +8,7 @@ export default class  extends BaseRepository{
     }
 
     async ListarUsuarios(){
-        let sql = "SELECT usu_id, usu_nome, usu_email FROM TB_Usuarios";
+        let sql = "SELECT usu_id, usu_nome, usu_email, is_master FROM TB_Usuarios";
 
         let result = await this.db.ExecutaComando(sql);
 

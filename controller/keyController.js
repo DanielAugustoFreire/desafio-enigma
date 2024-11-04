@@ -8,7 +8,7 @@ export default class KeyController{
         try{
             let keyRepo = new keyRepository();
             let chave = await keyRepo.obterChaveAtual();
-            if(chave){
+            if(chave.length > 0){
                 res.status(200).json(chave[0].chave);
             }else{
                 throw new Error("Nenhuma chave encontrada");
@@ -29,7 +29,11 @@ export default class KeyController{
             let keyEnt= new KeyEntitie();
             let chaveAnterior = await keyRepo.obterChaveAtual();   
             if(mensagem){
-                if(!chave){
+                if(chaveAnterior.length == 0 && !chave){
+                    res.status(400).send("Chave não informada");
+                    return;
+                }
+                else if(!chave){
                     chave = chaveAnterior;
                 }else{
                     let keyEntitie = new KeyEntitie("", chave, "", "", 1, usuario.id);
@@ -80,7 +84,7 @@ export default class KeyController{
                 let tamanhoKeys = keys.length;
                 let totalPages = Math.ceil(tamanhoKeys / limit); // ceil serve pra arredondar para cima
                 if(page > totalPages){
-                    throw new Error("Página não encontrada LIMITE EH 10");
+                    throw new Error("Página não encontrada - Chaves por pagina -> 10");
                 }
                 let offset = limit * (page - 1)
                 keys = keys.slice(offset, offset + limit);
@@ -100,7 +104,6 @@ export default class KeyController{
                 throw new Error("Nenhuma chave encontrada");
             }
         }catch(ex){
-            console.log(ex);
             res.status(500).send(ex.message);
         }
     }
