@@ -9,9 +9,8 @@ Neste projeto, desenvolvi uma aplicação em JavaScript para recriar um sistema 
 A aplicação é organizada utilizando o padrão MVC (Model-View-Controller) com Entidades e Repositories.
 
 # Como usar?
-***De acordo com as instruções: "Certifique-se de que todas as dependências estejam listadas e documentadas." A branch `master` contém todas as dependências já instaladas, portanto, sem o .gitignore para Node. Caso deseje baixar uma branch com o .gitignore (para não fazer o download da node_modules pelo navegador), baixe a branch `Daniel`.***
 
-Para instalar as dependências, digite (caso esteja usando a branch Daniel):
+Para instalar as dependências (caso necessario), digite:
 ``` 
     npm install
 ```
