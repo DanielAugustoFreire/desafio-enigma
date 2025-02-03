@@ -47,4 +47,20 @@ export default class AuthController{
             res.status(500).json({mensagem: "Erro ao fazer login!"});
         }
     }
+
+    async ValidarTokenAtivo(req,res){
+        try{
+            let token = req.headers.authorization;
+            let authMiddleware = new AuthMiddleware();
+            let tokenValido = await authMiddleware.ValidarToken(token);
+            if(!tokenValido){
+                res.status(401).json({mensagem: "Token inválido!"});
+                return;
+            }
+            res.json({nome: tokenValido.nome, email: tokenValido.email});
+        }
+        catch(ex){
+            res.status(500).json({mensagem: "Erro ao validar token!"});
+        }
+    }
 }

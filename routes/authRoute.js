@@ -31,5 +31,12 @@ router.post('/', (req, res) => {
     ctrl.autenticarUsuario(req, res);
 });
 
+router.get('/', (req, res) => {
+    // #swagger.tags = ['Autenticacao']
+    // #swagger.summary = 'Validacao de Autenticacao'
+    // #swagger.description = 'Middleware requisita ao back se esta tudo conforme'
+    ctrl.ValidarTokenAtivo(req, res);
+});
+
 
 export default router; 

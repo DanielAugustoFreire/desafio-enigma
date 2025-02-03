@@ -1,6 +1,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import swaggerUi from 'swagger-ui-express';
+import cors from 'cors';
 
 import userRoute from './routes/userRoute.js';
 import authRoute from './routes/authRoute.js';
@@ -30,7 +31,10 @@ const outputJson = require("./swagger_output.json");
 
 app.use(cookieParser());
 app.use(express.json());
-
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}))
 
 
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(outputJson));
@@ -50,15 +54,17 @@ app.use("/", keyRoute);
 async function InicializarDefaultUser(){
     try{        
         let userRepository = new UserRepository();
-        let userDefault = new UserEntitie("", "Mestre", "mestre@enigma.com", "Xsejmfççtrcty548!40", "", true);
+        let userDefault = new UserEntitie("", "Mestre", "mestre@enigma.com", "12345", "", true);
         userDefault = userDefault.setarSalt()
         userDefault = await userDefault.setarHash()
         await userRepository.cadastrarUsuario(userDefault);
     }catch(ex){
         if(ex.code == "ER_DUP_ENTRY"){
             console.log("Usuario Mestre ja cadastrado")
+        }else if(ex.code == "ECONNREFUSED"){
+            throw new Error("Conexao com o banco de dados nao estabelecida!")
         }else{
-            console.log(ex.message)
+            console.log("Erro ao cadastrar usuario mestre: " + ex)
         }
     }
 }

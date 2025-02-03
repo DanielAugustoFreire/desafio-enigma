@@ -9,6 +9,16 @@ export default class AuthMiddleware{
         return jwt.sign({ id, nome, email, master}, SEGREDO, {expiresIn: "1d"})
     }
 
+    async ValidarToken(token){
+        let objUsuario = jwt.verify(token, SEGREDO);
+        let repo = new userRepository();
+        let id = objUsuario.id;
+        let usuario = await repo.obterUsuarioPorId(id);
+        if(usuario.length > 0){
+            return objUsuario;
+        }
+    }
+
     async autenticarUsuario(req,res,next){
         let { token } = req.cookies
         if(token){
@@ -66,4 +76,6 @@ export default class AuthMiddleware{
             res.status(401).json({msg: "Nao Autorizado"});
         }
     }
+
+
 }

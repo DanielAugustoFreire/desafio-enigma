@@ -9,9 +9,9 @@ export default class KeyController{
             let keyRepo = new keyRepository();
             let chave = await keyRepo.obterChaveAtual();
             if(chave.length > 0){
-                res.status(200).json(chave[0].chave);
+                res.status(200).json({sucess: true, key: chave[0].chave});
             }else{
-                throw new Error("Nenhuma chave encontrada");
+                res.status(404).json({sucess: false, msg: "Nenhuma chave encontrada"});
             }
         }catch(ex){
             console.log(ex);
@@ -20,7 +20,7 @@ export default class KeyController{
     }
 
     async descriptografar(req,res){
-        let banco = new Database();
+        let banco = new Database(); 
         let usuario = req.usuarioLogado;
         await banco.AbreTransacao()
         try{
